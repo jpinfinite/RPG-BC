@@ -22,33 +22,41 @@ func _resolver_referencias() -> void:
 	if not game_manager:
 		game_manager = get_node_or_null("/root/GameManager")
 
+	var tree = get_tree()
+
 	if not progresso_mago:
-		progresso_mago = get_tree().get_first_node_in_group("mago_progressao") as MagoProgressao
+		if tree:
+			progresso_mago = tree.get_first_node_in_group("mago_progressao") as MagoProgressao
 		if not progresso_mago:
 			progresso_mago = get_node_or_null("../MagoProgressao") as MagoProgressao
 
 	if not contrato_demonio:
-		contrato_demonio = get_tree().get_first_node_in_group("contrato_demonio") as ContratoDemonio
+		if tree:
+			contrato_demonio = tree.get_first_node_in_group("contrato_demonio") as ContratoDemonio
 		if not contrato_demonio:
 			contrato_demonio = get_node_or_null("../ContratoDemonio") as ContratoDemonio
 
 	if not rank_manager:
-		rank_manager = get_tree().get_first_node_in_group("rank_manager") as RankManager
+		if tree:
+			rank_manager = tree.get_first_node_in_group("rank_manager") as RankManager
 		if not rank_manager:
 			rank_manager = get_node_or_null("../RankManager") as RankManager
 
 	if not esquadrao_manager:
-		esquadrao_manager = get_tree().get_first_node_in_group("esquadrao_manager") as EsquadraoManager
+		if tree:
+			esquadrao_manager = tree.get_first_node_in_group("esquadrao_manager") as EsquadraoManager
 		if not esquadrao_manager:
 			esquadrao_manager = get_node_or_null("../EsquadraoManager") as EsquadraoManager
 
 	if not spell_cooldown_manager:
-		spell_cooldown_manager = get_tree().get_first_node_in_group("spell_cooldown_manager") as SpellCooldownManager
+		if tree:
+			spell_cooldown_manager = tree.get_first_node_in_group("spell_cooldown_manager") as SpellCooldownManager
 		if not spell_cooldown_manager:
 			spell_cooldown_manager = get_node_or_null("../SpellCooldownManager") as SpellCooldownManager
 
 	if not missao_manager:
-		missao_manager = get_tree().get_first_node_in_group("missao_manager") as MissaoManager
+		if tree:
+			missao_manager = tree.get_first_node_in_group("missao_manager") as MissaoManager
 		if not missao_manager:
 			missao_manager = get_node_or_null("../MissaoManager") as MissaoManager
 

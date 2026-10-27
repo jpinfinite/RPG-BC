@@ -58,17 +58,21 @@ func realizar_cerimonia_aceitacao() -> Dictionary:
 
 ## Recalcula os status globais integrando bônus de Anti-Magia, Ranks e Esquadrão
 func atualizar_multiplicadores_globais() -> void:
-	var esquadrao_manager = get_tree().get_first_node_in_group("esquadrao_manager") as EsquadraoManager
+	var tree = get_tree()
+	if not tree:
+		return
+
+	var esquadrao_manager = tree.get_first_node_in_group("esquadrao_manager") as EsquadraoManager
 	if esquadrao_manager:
 		dps_esquadrao_passivo = esquadrao_manager.dps_total_aliados
 
-	var rank_manager = get_tree().get_first_node_in_group("rank_manager") as RankManager
+	var rank_manager = tree.get_first_node_in_group("rank_manager") as RankManager
 	if rank_manager:
 		var dados_rank = rank_manager.get_rank_atual()
 		mult_dano_rank = dados_rank.get("mult_dano", 1.0)
 		mult_ouro_rank = dados_rank.get("mult_ouro", 1.0)
 
-	var contrato = get_tree().get_first_node_in_group("contrato_demonio") as ContratoDemonio
+	var contrato = tree.get_first_node_in_group("contrato_demonio") as ContratoDemonio
 	if contrato:
 		mult_anti_magia_definitivo = contrato.bonus_anti_magia
 

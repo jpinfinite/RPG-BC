@@ -38,8 +38,10 @@ static func gerar_inimigo(andar: int) -> Dictionary:
 	else:
 		dados_base = INIMIGOS["javali_mana"].duplicate() if randf() > 0.4 else INIMIGOS["mago_rebelde"].duplicate()
 	
-	# Escalonamento matemático de jogo Idle (vida cresce exponencialmente)
-	dados_base["vida_max"] = dados_base["vida_base"] * pow(1.15, andar)
+	# Escalonamento matematico de jogo Idle
+	# Vida: 1.10^andar (reduzido de 1.15 para evitar gargalo apos andar 35)
+	# Ouro: 1.12^andar (mantido para economia consistente)
+	dados_base["vida_max"] = dados_base["vida_base"] * pow(1.10, andar)
 	dados_base["vida_atual"] = dados_base["vida_max"]
 	dados_base["ouro_recompensa"] = dados_base["ouro_base"] * pow(1.12, andar)
 	dados_base["poeira_recompensa"] = dados_base["poeira_base"] * pow(1.12, andar)

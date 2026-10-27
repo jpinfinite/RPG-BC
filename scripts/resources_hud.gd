@@ -1,4 +1,4 @@
-extends Control
+extends MarginContainer
 class_name ResourcesHUD
 ## HUD superior com recursos, DPS e informações do mago.
 
@@ -7,8 +7,12 @@ class_name ResourcesHUD
 @onready var lbl_dps: Label = %LblDps
 @onready var lbl_rank: Label = %LblRank
 @onready var lbl_andar: Label = %LblAndar
+@onready var btn_grimorio: Button = %BtnGrimorioHeader
 
 func _ready() -> void:
+	if btn_grimorio:
+		btn_grimorio.pressed.connect(_on_btn_grimorio_pressed)
+
 	if GameManager:
 		GameManager.recursos_atualizados.connect(_on_recursos_atualizados)
 		_on_recursos_atualizados()
@@ -16,6 +20,13 @@ func _ready() -> void:
 	var rank_manager = get_tree().get_first_node_in_group("rank_manager") as RankManager
 	if rank_manager:
 		rank_manager.jogador_promovido.connect(func(_titulo): _on_recursos_atualizados())
+
+func _on_btn_grimorio_pressed() -> void:
+	var invoc_ui = get_tree().get_first_node_in_group("invocacao_grimorio_ui") as InvocacaoGrimorioUI
+	if not invoc_ui:
+		invoc_ui = get_tree().root.find_child("InvocacaoGrimorioUI", true, false) as InvocacaoGrimorioUI
+	if invoc_ui:
+		invoc_ui.abrir_cerimonia()
 
 func _on_recursos_atualizados() -> void:
 	if not GameManager:
@@ -28,6 +39,9 @@ func _on_recursos_atualizados() -> void:
 	lbl_dps.text = "⚔ " + _fmt(dps_total) + " DPS"
 
 	lbl_andar.text = "Andar " + str(GameManager.andar_atual)
+
+	if btn_grimorio:
+		btn_grimorio.text = "📖 " + GameManager.raridade_grimorio
 
 	var rank_mgr = get_tree().get_first_node_in_group("rank_manager") as RankManager
 	if rank_mgr:

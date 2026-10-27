@@ -90,8 +90,7 @@ func atualizar_interface_charmy() -> void:
 	if not cozinha_charmy:
 		return
 	
-	var andar = GameManager.andar_atual if GameManager else 1
-	var custo_refeicao = 500.0 * pow(1.5, andar - 1)
+	var custo_refeicao = cozinha_charmy.get_custo_refeicao()
 	lbl_custo_refeicao.text = "Custo do Banquete: %d Ouro" % int(custo_refeicao)
 	
 	if GameManager and not cozinha_charmy.buff_ativo:

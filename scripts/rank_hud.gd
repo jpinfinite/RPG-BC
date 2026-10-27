@@ -61,7 +61,8 @@ func _disparar_animacao_promocao(novo_titulo: String) -> void:
 	tween.tween_property(banner_promocao, "scale", Vector2.ONE, 0.4)
 	
 	# Fica visível por 2.5 segundos e desvanece
-	var tween_out = create_tween().set_delay(2.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	var tween_out = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween_out.tween_interval(2.5)
 	tween_out.tween_property(banner_promocao, "modulate:a", 0.0, 0.5)
 	tween_out.tween_callback(func(): banner_promocao.visible = false)
 

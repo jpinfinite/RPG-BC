@@ -41,18 +41,16 @@ func _ready() -> void:
 
 func _on_combate_iniciado(inimigo: Dictionary) -> void:
 	lbl_nome_monstro.text = inimigo.get("nome", "Monstro Desconhecido")
-	var tipo = inimigo.get("tipo", "Comum")
-	var andar = 1
-	if combat_manager and combat_manager.game_manager:
-		andar = combat_manager.game_manager.andar_atual
-	
+	var tipo: String = inimigo.get("tipo", "Comum")
+	var andar: int = GameManager.andar_atual if GameManager else 1
+
 	if tipo == "Chefe":
 		lbl_tipo_andar.text = "👑 CHEFE • Andar %d" % andar
 		lbl_tipo_andar.modulate = Color(1.0, 0.25, 0.35)
 	else:
 		lbl_tipo_andar.text = "Andar %d • [%s]" % [andar, tipo]
 		lbl_tipo_andar.modulate = Color(0.65, 0.85, 1.0)
-	
+
 	var vida_max = inimigo.get("vida_max", 100.0)
 	var vida_atual = inimigo.get("vida_atual", vida_max)
 	

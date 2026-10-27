@@ -4,6 +4,7 @@ class_name InvocacaoGrimorioUI
 signal grimorio_invocado(dados: Dictionary)
 
 @onready var btn_invocar: Button = %BtnInvocar
+@onready var btn_fechar: Button = %BtnFechar
 @onready var lbl_nome: Label = %LblNome
 @onready var lbl_raridade: Label = %LblRaridade
 @onready var lbl_atributos: Label = %LblAtributos
@@ -21,6 +22,8 @@ var _invocando: bool = false
 
 func _ready() -> void:
 	btn_invocar.pressed.connect(_on_btn_invocar_pressed)
+	if btn_fechar:
+		btn_fechar.pressed.connect(fechar_cerimonia)
 	_configurar_gradiente_demonio()
 	_resetar_interface()
 	
@@ -28,6 +31,19 @@ func _ready() -> void:
 	if GameManager:
 		GameManager.recursos_atualizados.connect(_atualizar_botao)
 	_atualizar_botao()
+
+func abrir_cerimonia() -> void:
+	visible = true
+	_resetar_interface()
+	_atualizar_botao()
+	modulate.a = 0.0
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+func fechar_cerimonia() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_callback(func(): visible = false)
 
 func _atualizar_botao() -> void:
 	if not btn_invocar:

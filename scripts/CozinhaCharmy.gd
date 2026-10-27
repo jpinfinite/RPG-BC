@@ -18,12 +18,16 @@ func _process(delta: float) -> void:
 		if tempo_restante_buff <= 0:
 			desativar_buff()
 
+func get_custo_refeicao() -> float:
+	var andar = game_manager.andar_atual if game_manager else 1
+	return 250.0 * pow(1.10, max(0, andar - 1))
+
 # Compra a "Super Refeição de Ovelha Cozinheira" usando Ouro
 func comprar_refeicao_charmy() -> bool:
 	if not game_manager:
 		return false
 
-	var custo_refeicao = 500.0 * pow(1.5, game_manager.andar_atual - 1)
+	var custo_refeicao = get_custo_refeicao()
 	
 	if game_manager.ouro >= custo_refeicao and not buff_ativo:
 		game_manager.ouro -= custo_refeicao
@@ -34,10 +38,8 @@ func comprar_refeicao_charmy() -> bool:
 		# Injeta o modificador diretamente no GameManager
 		game_manager.multiplicador_ouro_global *= multiplicador_comida
 		game_manager.recursos_atualizados.emit()
-		print("Charmy cozinhou! Ganhos de ouro duplicados por 5 minutos.")
 		return true
 		
-	print("Não foi possível comprar a refeição (Ouro insuficiente ou buff já ativo).")
 	return false
 
 func desativar_buff() -> void:
