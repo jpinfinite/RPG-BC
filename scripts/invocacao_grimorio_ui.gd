@@ -128,7 +128,8 @@ func _exibir_resultado(dados: Dictionary) -> void:
 	# Animação de revelação
 	icone_grimorio.scale = Vector2(0.5, 0.5)
 	lbl_nome.scale = Vector2(1.2, 1.2)
-	var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	var tween = create_tween().set_parallel(true)
+	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(icone_grimorio, "scale", Vector2.ONE, 0.35)
 	tween.tween_property(lbl_nome, "scale", Vector2.ONE, 0.25)
 
@@ -138,7 +139,9 @@ func aplicar_efeito_particulas(dados: Dictionary) -> void:
 		mat = ParticleProcessMaterial.new()
 		particulas_aura.process_material = mat
 
-	var libera_demonio: bool = dados.get("raridade", "") == "Mítico" or String(dados.get("efeito_especial", "")).contains("Demônio")
+	var eh_mitico: bool = dados.get("raridade", "") == "Mítico"
+	var tem_demonio: bool = String(dados.get("efeito_especial", "")).contains("Demônio")
+	var libera_demonio: bool = eh_mitico or tem_demonio
 
 	if libera_demonio:
 		var grad_texture = GradientTexture1D.new()

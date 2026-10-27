@@ -44,13 +44,15 @@ func _resolver_referencias() -> void:
 
 	if not esquadrao_manager:
 		if tree:
-			esquadrao_manager = tree.get_first_node_in_group("esquadrao_manager") as EsquadraoManager
+			var no_esquadrao = tree.get_first_node_in_group("esquadrao_manager")
+			esquadrao_manager = no_esquadrao as EsquadraoManager
 		if not esquadrao_manager:
 			esquadrao_manager = get_node_or_null("../EsquadraoManager") as EsquadraoManager
 
 	if not spell_cooldown_manager:
 		if tree:
-			spell_cooldown_manager = tree.get_first_node_in_group("spell_cooldown_manager") as SpellCooldownManager
+			var no_spell = tree.get_first_node_in_group("spell_cooldown_manager")
+			spell_cooldown_manager = no_spell as SpellCooldownManager
 		if not spell_cooldown_manager:
 			spell_cooldown_manager = get_node_or_null("../SpellCooldownManager") as SpellCooldownManager
 
@@ -95,9 +97,17 @@ func salvar_jogo() -> void:
 		# Rank
 		"rank_index": rank_manager.rank_index_atual if rank_manager else 0,
 		# Esquadrão
-		"niveis_aliados": esquadrao_manager.niveis_aliados if esquadrao_manager else {"magna": 0, "noelle": 0, "yuno": 0},
+		"niveis_aliados": (
+			esquadrao_manager.niveis_aliados
+			if esquadrao_manager
+			else {"magna": 0, "noelle": 0, "yuno": 0}
+		),
 		# Magias
-		"magias_desbloqueadas": spell_cooldown_manager.magias_desbloqueadas if spell_cooldown_manager else {},
+		"magias_desbloqueadas": (
+			spell_cooldown_manager.magias_desbloqueadas
+			if spell_cooldown_manager
+			else {}
+		),
 		# Missões
 		"medalhas_merito": missao_manager.medalhas_merito if missao_manager else 0,
 		"missao_ativa": missao_manager.missao_ativa if missao_manager else {},
@@ -175,16 +185,24 @@ func carregar_jogo() -> void:
 	# ── Rank ──
 	if rank_manager:
 		rank_manager.rank_index_atual = _safe_int(d, "rank_index", 0)
-		rank_manager._aplicar_beneficios_rank()
+		rank_manager.aplicar_beneficios_rank()
 
 	# ── Esquadrão ──
 	if esquadrao_manager:
-		esquadrao_manager.niveis_aliados = d.get("niveis_aliados", {"magna": 0, "noelle": 0, "yuno": 0})
+		var padrao_aliados = {"magna": 0, "noelle": 0, "yuno": 0}
+		esquadrao_manager.niveis_aliados = d.get("niveis_aliados", padrao_aliados)
 		esquadrao_manager.recalcular_dps_esquadrao()
 
 	# ── Magias ──
 	if spell_cooldown_manager:
-		spell_cooldown_manager.magias_desbloqueadas = d.get("magias_desbloqueadas", {"rugido_leao": false, "dragao_mar": false, "corte_dimensional": false})
+		var padrao_magias = {
+			"rugido_leao": false,
+			"dragao_mar": false,
+			"corte_dimensional": false
+		}
+		spell_cooldown_manager.magias_desbloqueadas = d.get(
+			"magias_desbloqueadas", padrao_magias
+		)
 
 	# ── Missões ──
 	if missao_manager:
@@ -232,10 +250,27 @@ func _calcular_progresso_offline(ultimo_timestamp: float) -> void:
 	segundos_offline = minf(segundos_offline, 43200.0)
 
 	# DPS efetivo considera esquadrão + rank
-	var dps_efetivo: float = (game_manager.dano_por_segundo + game_manager.dps_esquadrao_passivo) * game_manager.multiplicador_mana * game_manager.mult_anti_magia_definitivo * game_manager.mult_dano_rank
+	var dps_base_total: float = (
+		game_manager.dano_por_segundo + game_manager.dps_esquadrao_passivo
+	)
+	var mult_dps: float = (
+		game_manager.multiplicador_mana
+		* game_manager.mult_anti_magia_definitivo
+		* game_manager.mult_dano_rank
+	)
+	var dps_efetivo: float = dps_base_total * mult_dps
+
 	# Taxa de ouro por segundo (igual ao combate real)
-	var ouro_por_segundo: float = (dps_efetivo * game_manager.mult_ouro * game_manager.mult_ouro_rank) * (1.0 + (game_manager.andar_atual * 0.1))
-	var total_ouro: float = ouro_por_segundo * segundos_offline * game_manager.multiplicador_ouro_global
+	var mult_ouro_total: float = (
+		game_manager.mult_ouro * game_manager.mult_ouro_rank
+	)
+	var fator_andar: float = 1.0 + (game_manager.andar_atual * 0.1)
+	var ouro_por_segundo: float = dps_efetivo * mult_ouro_total * fator_andar
+	var total_ouro: float = (
+		ouro_por_segundo
+		* segundos_offline
+		* game_manager.multiplicador_ouro_global
+	)
 
 	# Garante valor não negativo
 	total_ouro = maxf(0.0, total_ouro)

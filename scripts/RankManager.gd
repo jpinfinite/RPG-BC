@@ -39,10 +39,13 @@ func verificar_promocao() -> void:
 			_aplicar_beneficios_rank()
 			jogador_promovido.emit(RANKS[rank_index_atual]["titulo"])
 
-func _aplicar_beneficios_rank() -> void:
+func aplicar_beneficios_rank() -> void:
 	# Injeta os multiplicadores de rank diretamente na fórmula global do GameManager
 	if game_manager:
-		game_manager.actualizar_multiplicadores_globais()
+		game_manager.atualizar_multiplicadores_globais()
+
+func _aplicar_beneficios_rank() -> void:
+	aplicar_beneficios_rank()
 
 # Retorna os dados do Rank atual do jogador
 func get_rank_atual() -> Dictionary:
