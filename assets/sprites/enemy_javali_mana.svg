@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="boarSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3022"/>
+      <stop offset="50%" stop-color="#2d1a10"/>
+      <stop offset="100%" stop-color="#140b06"/>
+    </linearGradient>
+    <linearGradient id="manaFlame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0077b6"/>
+      <stop offset="50%" stop-color="#00f5d4"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="manaGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="128" cy="225" rx="75" ry="16" fill="#000000" opacity="0.45"/>
+
+  <!-- Mana Flames on Boar's Back Mane -->
+  <g filter="url(#manaGlow)">
+    <path d="M 65,115 C 60,85 75,70 82,90 C 88,65 105,55 110,80 C 118,50 140,45 142,75 C 150,55 170,60 168,90 C 176,75 192,80 188,110 Z" fill="url(#manaFlame)"/>
+    <!-- Flame Sparks -->
+    <circle cx="95" cy="55" r="2.5" fill="#00f5d4"/>
+    <circle cx="128" cy="40" r="3" fill="#ffffff"/>
+    <circle cx="155" cy="50" r="2" fill="#00f5d4"/>
+  </g>
+
+  <!-- Boar Muscular Body -->
+  <path d="M 52,185 L 60,135 C 65,105 95,95 140,95 C 185,95 210,115 215,145 L 210,185 L 195,190 L 190,165 C 175,160 160,162 145,165 L 140,195 L 125,195 L 125,168 C 110,168 95,170 80,172 L 72,195 Z" fill="url(#boarSkin)" stroke="#110703" stroke-width="2.5"/>
+
+  <!-- Boar Head & Snout (Facing Left towards Hero) -->
+  <path d="M 120,115 L 65,125 L 42,150 L 52,175 L 85,168 L 125,162 Z" fill="#3a2216" stroke="#120803" stroke-width="2.5"/>
+  
+  <!-- Snout Disc -->
+  <ellipse cx="44" cy="155" rx="12" ry="16" fill="#22120a" stroke="#100602" stroke-width="2"/>
+  <circle cx="41" cy="152" r="3" fill="#050201"/>
+  <circle cx="41" cy="160" r="3" fill="#050201"/>
+
+  <!-- Menacing Red Glowing Eye -->
+  <polygon points="76,132 88,135 78,140" fill="#ff0044" filter="url(#manaGlow)"/>
+  <polygon points="78,134 85,136 79,138" fill="#ffffff"/>
+
+  <!-- Colossal Curved Tusks -->
+  <!-- Left Tusk -->
+  <path d="M 52,165 Q 25,175 16,140 Q 25,120 40,146 Z" fill="#f0ebd8" stroke="#3d2a1d" stroke-width="1.5"/>
+  <!-- Right Tusk (behind) -->
+  <path d="M 64,168 Q 45,185 36,155 Q 46,138 56,154 Z" fill="#d8d0be" stroke="#3d2a1d" stroke-width="1.5"/>
+
+  <!-- Spiky Fur Details & Battle Scars -->
+  <path d="M 85,115 L 75,122 L 88,126" stroke="#22120a" stroke-width="2" fill="none"/>
+  <path d="M 130,118 L 120,126 L 135,130" stroke="#22120a" stroke-width="2" fill="none"/>
+  <path d="M 175,125 L 165,132 L 178,136" stroke="#22120a" stroke-width="2" fill="none"/>
+  
+  <!-- Mana Crystal Horns Sprouting on Forehead -->
+  <polygon points="85,108 92,92 98,110" fill="#00b4d8" stroke="#caf0f8" stroke-width="1"/>
+  <polygon points="102,105 110,86 116,108" fill="#00f5d4" stroke="#caf0f8" stroke-width="1"/>
+</svg>

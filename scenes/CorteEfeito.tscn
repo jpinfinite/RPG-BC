@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Shader" path="res://AntiMagiaShader.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/sprites/corte_slash.svg" id="2_texture"]
+[ext_resource type="Script" path="res://scripts/CorteEfeito.gd" id="3_script"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_corte"]
+shader = ExtResource("1_shader")
+shader_parameter/cor_contorno = Color(0.75, 0.02, 0.12, 1)
+shader_parameter/cor_nucleo = Color(0.01, 0, 0.02, 1)
+shader_parameter/velocidade_pulso = 4.0
+shader_parameter/intensidade_brilho = 1.8
+
+[node name="CorteEfeito" type="Sprite2D"]
+z_index = 10
+material = SubResource("ShaderMaterial_corte")
+texture = ExtResource("2_texture")
+script = ExtResource("3_script")

@@ -1,0 +1,339 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/skills_hud.gd" id="1_skills_hud"]
+[ext_resource type="Texture2D" path="res://assets/sprites/spell_rugido_leao.svg" id="2_rugido"]
+[ext_resource type="Texture2D" path="res://assets/sprites/spell_dragao_mar.svg" id="3_dragao"]
+[ext_resource type="Texture2D" path="res://assets/sprites/spell_corte_dimensional.svg" id="4_corte"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skill_radial_progress.svg" id="5_radial"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skill_slot_border.svg" id="6_border"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_bg"]
+bg_color = Color(0.08, 0.08, 0.11, 0.85)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.25, 0.15, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lock"]
+bg_color = Color(0.05, 0.05, 0.08, 0.82)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="SkillsHUD" type="PanelContainer"]
+custom_minimum_size = Vector2(480, 110)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud_bg")
+script = ExtResource("1_skills_hud")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="SlotsContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Slot_rugido_leao" type="Control" parent="MarginContainer/SlotsContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+
+[node name="BotaoMagia" type="TextureButton" parent="MarginContainer/SlotsContainer/Slot_rugido_leao"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_rugido")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CooldownBar" type="TextureProgressBar" parent="MarginContainer/SlotsContainer/Slot_rugido_leao"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+fill_mode = 4
+radial_initial_angle = 270.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_radial")
+tint_progress = Color(0.9, 0.35, 0.1, 0.85)
+
+[node name="Border" type="TextureRect" parent="MarginContainer/SlotsContainer/Slot_rugido_leao"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_border")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TempoLabel" type="Label" parent="MarginContainer/SlotsContainer/Slot_rugido_leao"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -14.0
+offset_right = 38.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "12s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LockOverlay" type="Panel" parent="MarginContainer/SlotsContainer/Slot_rugido_leao"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lock")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/SlotsContainer/Slot_rugido_leao/LockOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="LockIcon" type="Label" parent="MarginContainer/SlotsContainer/Slot_rugido_leao/LockOverlay/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "🔒"
+horizontal_alignment = 1
+
+[node name="CustoLabel" type="Label" parent="MarginContainer/SlotsContainer/Slot_rugido_leao/LockOverlay/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "500 ✨"
+horizontal_alignment = 1
+
+[node name="Slot_dragao_mar" type="Control" parent="MarginContainer/SlotsContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+
+[node name="BotaoMagia" type="TextureButton" parent="MarginContainer/SlotsContainer/Slot_dragao_mar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_dragao")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CooldownBar" type="TextureProgressBar" parent="MarginContainer/SlotsContainer/Slot_dragao_mar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+fill_mode = 4
+radial_initial_angle = 270.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_radial")
+tint_progress = Color(0.15, 0.6, 1, 0.85)
+
+[node name="Border" type="TextureRect" parent="MarginContainer/SlotsContainer/Slot_dragao_mar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_border")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TempoLabel" type="Label" parent="MarginContainer/SlotsContainer/Slot_dragao_mar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -14.0
+offset_right = 38.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "25s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LockOverlay" type="Panel" parent="MarginContainer/SlotsContainer/Slot_dragao_mar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lock")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/SlotsContainer/Slot_dragao_mar/LockOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="LockIcon" type="Label" parent="MarginContainer/SlotsContainer/Slot_dragao_mar/LockOverlay/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "🔒"
+horizontal_alignment = 1
+
+[node name="CustoLabel" type="Label" parent="MarginContainer/SlotsContainer/Slot_dragao_mar/LockOverlay/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "2.5K ✨"
+horizontal_alignment = 1
+
+[node name="Slot_corte_dimensional" type="Control" parent="MarginContainer/SlotsContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+
+[node name="BotaoMagia" type="TextureButton" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_corte")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CooldownBar" type="TextureProgressBar" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+fill_mode = 4
+radial_initial_angle = 270.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_radial")
+tint_progress = Color(0.7, 0.15, 0.9, 0.85)
+
+[node name="Border" type="TextureRect" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_border")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TempoLabel" type="Label" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -14.0
+offset_right = 38.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "60s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LockOverlay" type="Panel" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lock")
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional/LockOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="LockIcon" type="Label" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional/LockOverlay/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "🔒"
+horizontal_alignment = 1
+
+[node name="CustoLabel" type="Label" parent="MarginContainer/SlotsContainer/Slot_corte_dimensional/LockOverlay/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "15K ✨"
+horizontal_alignment = 1

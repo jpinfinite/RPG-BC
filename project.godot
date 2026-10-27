@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; but it can also be edited by hand.
+
+config_version=5
+
+[application]
+
+config/name="RPG IDLE BC"
+run/main_scene="res://scenes/splash_loading_screen.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://assets/sprites/hero_anti_magic.png"
+
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
+WebExportConfig="*res://scripts/WebExportConfig.gd"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.web="gl_compatibility"
+; default_texture_filter:
+; 0 = Nearest (Pixel Art nítido)
+; 1 = Linear (Desenho suave / estilo anime)
+textures/canvas_textures/default_texture_filter=1
+textures/vram_compression/import_etc2_astc=true

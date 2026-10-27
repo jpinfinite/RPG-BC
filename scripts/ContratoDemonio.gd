@@ -1,0 +1,78 @@
+extends Node
+class_name ContratoDemonio
+
+signal contrato_executado(moedas_ganhas: int)
+signal poder_demoniaco_comprado(novo_bonus: float)
+
+@export var game_manager: Node
+@export var progresso_mago: MagoProgressao
+
+# Moeda permanente de Prestígio
+var moedas_submundo: int = 0
+
+# Multiplicador permanente comprado na loja do submundo
+var bonus_anti_magia: float = 1.0 # 1.0 = +0%, 2.0 = +100% de dano global
+
+func _ready() -> void:
+	if not game_manager and get_node_or_null("/root/GameManager"):
+		game_manager = get_node("/root/GameManager")
+	if not progresso_mago and get_tree():
+		progresso_mago = get_tree().get_first_node_in_group("mago_progressao") as MagoProgressao
+
+# Calcula os ganhos antes de resetar
+func calcular_moedas_ganhas() -> int:
+	if not game_manager or game_manager.andar_atual < 50:
+		return 0 # O contrato só fica disponível a partir do andar 50
+	
+	var nivel = progresso_mago.nivel_mago if progresso_mago else 1
+	# Fórmula clássica Idle: ganho baseado no andar alcançado e nível do mago
+	var moedas = (game_manager.andar_atual - 40) * 2 + (nivel / 5)
+	return int(moedas)
+
+# Executa o ritual de reset (Prestígio)
+func realizar_contrato_proibido() -> bool:
+	var moedas_a_receber = calcular_moedas_ganhas()
+	
+	if moedas_a_receber <= 0:
+		print("Você ainda não acumulou desespero suficiente. Alcance o Andar 50+!")
+		return false
+		
+	# 1. Entrega a recompensa permanente
+	moedas_submundo += moedas_a_receber
+	
+	# 2. Reseta o progresso temporário do jogador
+	game_manager.ouro = 0.0
+	game_manager.poeira_mana = 0.0
+	game_manager.andar_atual = 1
+	
+	if progresso_mago:
+		progresso_mago.nivel_mago = 1
+	game_manager.dano_por_segundo = 10.0 # Reseta ao dano inicial
+	
+	# 3. Força o CombatManager a reiniciar no andar 1
+	var combat_manager = get_tree().get_first_node_in_group("combat_manager") as CombatManager
+	if not combat_manager:
+		combat_manager = get_node_or_null("../CombatManager") as CombatManager
+	if combat_manager:
+		combat_manager.iniciar_novo_combate()
+	
+	game_manager.atualizar_multiplicadores_globais()
+	contrato_executado.emit(moedas_a_receber)
+	print("Contrato realizado! Você recebeu ", moedas_a_receber, " moedas do submundo. O mundo foi resetado.")
+	return true
+
+# Compra upgrade permanente com as moedas ganhas
+func comprar_poder_demoniaco() -> bool:
+	var custo = 10 * bonus_anti_magia
+	if moedas_submundo >= custo:
+		moedas_submundo -= int(custo)
+		bonus_anti_magia += 1.0 # Adiciona +100% de dano global definitivo
+		
+		# Atualiza o multiplicador global do GameManager
+		game_manager.atualizar_multiplicadores_globais()
+		poder_demoniaco_comprado.emit(bonus_anti_magia)
+		print("Poder de Anti-Magia aumentado! Novo bônus: +", (bonus_anti_magia - 1) * 100, "% de dano.")
+		return true
+	
+	print("Moedas do Submundo insuficientes. Custo: ", custo)
+	return false

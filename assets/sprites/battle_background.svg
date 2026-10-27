@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 640" width="1080" height="640">
+  <defs>
+    <!-- Night Sky Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#070312"/>
+      <stop offset="40%" stop-color="#14092b"/>
+      <stop offset="75%" stop-color="#261047"/>
+      <stop offset="100%" stop-color="#3d1858"/>
+    </linearGradient>
+
+    <!-- Mana Moon Glow -->
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e0f7fa"/>
+      <stop offset="40%" stop-color="#80deea" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#00b4d8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0077b6" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Distant Mountains Gradient -->
+    <linearGradient id="mountGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d1245"/>
+      <stop offset="100%" stop-color="#12061e"/>
+    </linearGradient>
+
+    <!-- Foreground Mountain Gradient -->
+    <linearGradient id="mountGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3f1a5c"/>
+      <stop offset="100%" stop-color="#1a0827"/>
+    </linearGradient>
+
+    <!-- Arena Stone Ground Gradient -->
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b1a38"/>
+      <stop offset="30%" stop-color="#1c1026"/>
+      <stop offset="100%" stop-color="#0c0612"/>
+    </linearGradient>
+
+    <!-- Glowing Runes Filter -->
+    <filter id="runeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect x="0" y="0" width="1080" height="640" fill="url(#skyGrad)"/>
+
+  <!-- Background Stars / Mana motes -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="120" cy="80" r="1.5"/>
+    <circle cx="240" cy="45" r="2.5"/>
+    <circle cx="310" cy="110" r="1.5"/>
+    <circle cx="480" cy="70" r="2"/>
+    <circle cx="620" cy="50" r="1.5"/>
+    <circle cx="750" cy="95" r="2.5"/>
+    <circle cx="890" cy="65" r="1.5"/>
+    <circle cx="980" cy="120" r="2"/>
+    <circle cx="1020" cy="40" r="1.5"/>
+    <circle cx="70" cy="160" r="2"/>
+    <circle cx="560" cy="140" r="1.5"/>
+    <circle cx="820" cy="160" r="2"/>
+  </g>
+
+  <!-- Mana Moon & Halo -->
+  <circle cx="880" cy="140" r="90" fill="url(#moonGlow)"/>
+  <circle cx="880" cy="140" r="48" fill="#e0f7fa"/>
+  <circle cx="892" cy="132" r="44" fill="#14092b" opacity="0.15"/>
+
+  <!-- Distant Castle / Floating Magic Rocks -->
+  <path d="M 180,240 L 210,180 L 240,240 Z" fill="#1c0b2b"/>
+  <path d="M 215,240 L 235,160 L 255,240 Z" fill="#180925"/>
+  <path d="M 260,250 L 275,200 L 290,250 Z" fill="#1c0b2b"/>
+  <!-- Floating Monolith -->
+  <polygon points="720,180 745,160 760,195 735,215" fill="#2b1442" stroke="#48cae4" stroke-width="0.75" opacity="0.8"/>
+  <polygon points="380,195 395,185 405,205 390,215" fill="#2b1442" opacity="0.7"/>
+
+  <!-- Mountain Silhouettes (Layer 1 - Far) -->
+  <path d="M 0,380 L 120,290 L 280,360 L 450,260 L 620,350 L 780,270 L 920,340 L 1080,250 L 1080,500 L 0,500 Z" fill="url(#mountGrad1)"/>
+
+  <!-- Mountain Silhouettes (Layer 2 - Near) -->
+  <path d="M 0,430 L 180,340 L 360,420 L 580,310 L 750,400 L 940,330 L 1080,380 L 1080,520 L 0,520 Z" fill="url(#mountGrad2)"/>
+
+  <!-- Arena Stone Ground Plateau -->
+  <path d="M 0,460 Q 540,430 1080,460 L 1080,640 L 0,640 Z" fill="url(#groundGrad)"/>
+  
+  <!-- Edge highlight of stone rim -->
+  <path d="M 0,460 Q 540,430 1080,460" stroke="#7b2cbf" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 0,463 Q 540,433 1080,463" stroke="#ffd166" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+  <!-- Arcane Runes on Stone Ground -->
+  <g filter="url(#runeGlow)" opacity="0.7">
+    <!-- Center magic circle projection -->
+    <ellipse cx="540" cy="540" rx="340" ry="60" fill="none" stroke="#9d4edd" stroke-width="2" stroke-dasharray="8 6"/>
+    <ellipse cx="540" cy="540" rx="260" ry="45" fill="none" stroke="#c77dff" stroke-width="1.5"/>
+    <ellipse cx="540" cy="540" rx="140" ry="24" fill="none" stroke="#e0aaff" stroke-width="1"/>
+    
+    <!-- Hero side platform glow (Left) -->
+    <ellipse cx="280" cy="545" rx="130" ry="25" fill="#ff0055" fill-opacity="0.12" stroke="#ff0055" stroke-width="1.5" stroke-opacity="0.4"/>
+    
+    <!-- Enemy side platform glow (Right) -->
+    <ellipse cx="800" cy="545" rx="130" ry="25" fill="#00b4d8" fill-opacity="0.12" stroke="#00b4d8" stroke-width="1.5" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Ground Stone Cracks & Texture -->
+  <path d="M 220,530 L 260,545 L 310,540 M 740,535 L 790,550 L 830,538" stroke="#100718" stroke-width="2" fill="none"/>
+  <path d="M 480,550 L 540,560 L 600,555" stroke="#100718" stroke-width="2.5" fill="none"/>
+
+  <!-- Low mist / atmospheric fog -->
+  <path d="M 0,510 Q 280,490 540,520 Q 820,540 1080,510 L 1080,570 Q 540,600 0,570 Z" fill="#4d1266" opacity="0.15"/>
+</svg>

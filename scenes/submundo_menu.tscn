@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7m5e3u9v4d0r"]
+
+[ext_resource type="Script" path="res://scripts/submundo_menu.gd" id="1_submundo"]
+
+[sub_resource type="Gradient" id="Gradient_fumaca"]
+offsets = PackedFloat32Array(0, 0.45, 0.85, 1)
+colors = PackedColorArray(0.08, 0.02, 0.03, 0.85, 0.04, 0.03, 0.04, 0.75, 0.01, 0.01, 0.01, 0.4, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fumaca"]
+gradient = SubResource("Gradient_fumaca")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fumaca"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(260, 20, 1)
+direction = Vector3(0, -1, 0)
+spread = 35.0
+initial_velocity_min = 35.0
+initial_velocity_max = 85.0
+gravity = Vector3(0, -15, 0)
+scale_min = 12.0
+scale_max = 24.0
+color_ramp = SubResource("GradientTexture1D_fumaca")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_submundo"]
+bg_color = Color(0.1, 0.02, 0.03, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.08, 0.15, 0.7)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_contrato"]
+bg_color = Color(0.65, 0.05, 0.1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="SubmundoMenu" type="Control"]
+custom_minimum_size = Vector2(480, 420)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_submundo")
+
+[node name="FundoVermelhoEscuro" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.015, 0.025, 0.98)
+
+[node name="ParticulasFumacaPreta" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(240, 400)
+amount = 45
+process_material = SubResource("ParticleProcessMaterial_fumaca")
+lifetime = 3.5
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(440, 360)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_submundo")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Card"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Titulo" type="Label" parent="CenterContainer/Card/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 24
+text = "Portal do Submundo"
+horizontal_alignment = 1
+
+[node name="LblCarteiraSubmundo" type="Label" parent="CenterContainer/Card/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "Moedas do Submundo: 0 🩸"
+horizontal_alignment = 1
+
+[node name="LblBonusAtual" type="Label" parent="CenterContainer/Card/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.35, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "Anti-Magia Definitiva: +0% Dano Global (x1.0)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Card/VBox"]
+layout_mode = 2
+
+[node name="LblAvisoReset" type="Label" parent="CenterContainer/Card/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.45, 1)
+theme_override_font_sizes/font_size = 14
+text = "Carregando status do pacto..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BtnContratoDemonio" type="Button" parent="CenterContainer/Card/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 52)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_contrato")
+text = "Fazer Contrato com o Demônio"
+
+[node name="BtnComprarPoder" type="Button" parent="CenterContainer/Card/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
+text = "Poder Demoníaco (+100% Dano)"
