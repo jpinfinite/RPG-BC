@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 320" width="256" height="320">
+  <defs>
+    <linearGradient id="cover5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2327"/>
+      <stop offset="50%" stop-color="#141113"/>
+      <stop offset="100%" stop-color="#080708"/>
+    </linearGradient>
+    <filter id="glow5" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Book Spine & Pages (Weathered / Dark Parchment) -->
+  <rect x="24" y="24" width="216" height="276" rx="14" fill="#3a3035" stroke="#1c161a" stroke-width="4"/>
+  <!-- Front Cover (Tattered Dark Demon Leather) -->
+  <rect x="18" y="20" width="212" height="280" rx="12" fill="url(#cover5)" stroke="#661111" stroke-width="6"/>
+  <!-- Cursed Crimson Runes Borders -->
+  <rect x="30" y="32" width="188" height="256" rx="8" fill="none" stroke="#990022" stroke-width="3" stroke-dasharray="12 4 4 4" opacity="0.85"/>
+  <circle cx="124" cy="150" r="70" fill="none" stroke="#660015" stroke-width="3" stroke-dasharray="8 6"/>
+  <!-- Demonic Corners -->
+  <path d="M 18,65 L 65,18 L 18,18 Z" fill="#4d0011"/>
+  <path d="M 183,18 L 230,65 L 230,18 Z" fill="#4d0011"/>
+  <path d="M 18,255 L 65,302 L 18,302 Z" fill="#4d0011"/>
+  <path d="M 183,302 L 230,255 L 230,302 Z" fill="#4d0011"/>
+  <!-- 5-Leaf Clover (In the fifth leaf resides a Demon) -->
+  <g transform="translate(124, 150)" filter="url(#glow5)">
+    <!-- Top Leaf -->
+    <path d="M 0,0 C -25,-35 -5,-55 0,-30 C 5,-55 25,-35 0,0 Z" fill="#e60026"/>
+    <!-- Bottom Left Leaf -->
+    <path d="M 0,0 C -35,15 -50,45 -20,30 C -35,50 -10,48 0,0 Z" fill="#b3001e"/>
+    <!-- Bottom Right Leaf -->
+    <path d="M 0,0 C 35,15 50,45 20,30 C 35,50 10,48 0,0 Z" fill="#b3001e"/>
+    <!-- Top Left Leaf -->
+    <path d="M 0,0 C -35,-25 -55,-5 -30,0 C -55,5 -35,25 0,0 Z" fill="#cc0022"/>
+    <!-- Top Right Leaf -->
+    <path d="M 0,0 C 35,-25 55,-5 30,0 C 55,5 35,25 0,0 Z" fill="#cc0022"/>
+    <!-- 5th Leaf: The Demon Sprout -->
+    <path d="M 0,0 C -6,15 0,38 0,38 C 0,38 6,15 0,0 Z" fill="#ff1a3c"/>
+    <!-- Demonic eye core -->
+    <circle cx="0" cy="0" r="6" fill="#ff3355"/>
+    <circle cx="0" cy="0" r="2.5" fill="#000000"/>
+  </g>
+</svg>

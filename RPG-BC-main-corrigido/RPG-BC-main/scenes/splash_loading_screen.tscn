@@ -1,0 +1,134 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/splash_loading_screen.gd" id="1_splash_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/black_clover_logo.svg" id="2_logo_texture"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.08, 0.07, 0.1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.28, 0.15, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_fill"]
+bg_color = Color(0.95, 0.78, 0.22, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.92, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="SplashLoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_splash_script")
+
+[node name="FundoPreto" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.03, 0.05, 1)
+
+[node name="CentroContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -220.0
+offset_right = 260.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="LogoContainer" type="Control" parent="CentroContainer"]
+custom_minimum_size = Vector2(500, 240)
+layout_mode = 2
+
+[node name="LogoRect" type="TextureRect" parent="CentroContainer/LogoContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_logo_texture")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BarraSection" type="VBoxContainer" parent="CentroContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ContainerProgresso" type="Control" parent="CentroContainer/BarraSection"]
+custom_minimum_size = Vector2(460, 28)
+layout_mode = 2
+
+[node name="ProgressBarCarregamento" type="ProgressBar" parent="CentroContainer/BarraSection/ContainerProgresso"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
+value = 50.0
+show_percentage = false
+
+[node name="LblPorcentagem" type="Label" parent="CentroContainer/BarraSection/ContainerProgresso"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.12, 0.08, 0.02, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.95, 0.7, 0.4)
+theme_override_font_sizes/font_size = 14
+text = "50%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblStatusCarregamento" type="Label" parent="CentroContainer/BarraSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.75, 0.5, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "Despertando Grimórios Elementares..."
+horizontal_alignment = 1
+
+[node name="LblDicaWeb" type="Label" parent="CentroContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.55, 0.65, 0.8)
+theme_override_font_sizes/font_size = 12
+text = "⚡ Otimizado para WebGL 2 • O jogo salva automaticamente seu progresso"
+horizontal_alignment = 1

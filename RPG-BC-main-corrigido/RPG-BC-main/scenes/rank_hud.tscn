@@ -1,0 +1,147 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyp4g7k9d21mv"]
+
+[ext_resource type="Script" path="res://scripts/rank_hud.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_painel_rank"]
+bg_color = Color(0.08, 0.08, 0.12, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.75, 0.2, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Gradient" id="Gradient_mana"]
+offsets = PackedFloat32Array(0, 0.35, 0.75, 1)
+colors = PackedColorArray(1, 0.95, 0.4, 1, 0.3, 0.85, 1, 0.9, 0.8, 0.5, 1, 0.8, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mana"]
+gradient = SubResource("Gradient_mana")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mana"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(270, 480, 1)
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, -20, 0)
+scale_min = 3.0
+scale_max = 7.0
+color_ramp = SubResource("GradientTexture1D_mana")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_banner"]
+bg_color = Color(0.06, 0.06, 0.1, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.82, 0.15, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 14
+
+[node name="RankHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hud")
+
+[node name="PanelRank" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(340, 60)
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 356.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_painel_rank")
+
+[node name="Margin" type="MarginContainer" parent="PanelRank"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="PanelRank/Margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="LblRankTitulo" type="Label" parent="PanelRank/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 15
+text = "Cavaleiro Mágico Júnior - Classe 5"
+
+[node name="LblBonusRank" type="Label" parent="PanelRank/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Poder de Patente: x1.0 Dano • x1.0 Ouro"
+
+[node name="ParticulasPromocao" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(270, 480)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_mana")
+lifetime = 2.5
+one_shot = true
+explosiveness = 0.7
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BannerPromocao" type="PanelContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_banner")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/BannerPromocao"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/BannerPromocao/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Subtitulo" type="Label" parent="CenterContainer/BannerPromocao/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "✨ PROMOÇÃO DE CAVALEIRO MÁGICO ✨"
+horizontal_alignment = 1
+
+[node name="LblNovoRankBanner" type="Label" parent="CenterContainer/BannerPromocao/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.15, 1)
+theme_override_font_sizes/font_size = 22
+text = "Cavaleiro Mágico Intermediário"
+horizontal_alignment = 1
+autowrap_mode = 2

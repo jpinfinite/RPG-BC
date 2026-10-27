@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+  <!-- Radial mask disc for TextureProgressBar (white so it can be tinted via Godot tint_progress) -->
+  <circle cx="48" cy="48" r="44" fill="#000000" fill-opacity="0.75"/>
+  <circle cx="48" cy="48" r="44" fill="none" stroke="#ffffff" stroke-width="3" stroke-opacity="0.8"/>
+</svg>

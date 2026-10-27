@@ -1,0 +1,12 @@
+# Godot 4 specific ignores
+.godot/
+*.translation
+
+# Build & export outputs
+build/
+export/
+
+# OS and Editor temporary files
+Thumbs.db
+.DS_Store
+*.tmp

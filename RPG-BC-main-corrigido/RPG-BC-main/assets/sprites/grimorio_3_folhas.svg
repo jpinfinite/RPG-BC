@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 320" width="256" height="320">
+  <defs>
+    <linearGradient id="cover3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3525"/>
+      <stop offset="50%" stop-color="#2e1f14"/>
+      <stop offset="100%" stop-color="#1b120a"/>
+    </linearGradient>
+    <filter id="glow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Book Spine & Pages -->
+  <rect x="24" y="24" width="216" height="276" rx="14" fill="#d9c59a" stroke="#8a7550" stroke-width="4"/>
+  <!-- Front Cover -->
+  <rect x="18" y="20" width="212" height="280" rx="12" fill="url(#cover3)" stroke="#7a5530" stroke-width="6"/>
+  <!-- Leather Border Inlay -->
+  <rect x="32" y="34" width="184" height="252" rx="8" fill="none" stroke="#25d366" stroke-width="2.5" stroke-dasharray="8 4" opacity="0.6"/>
+  <!-- Corner Metal Protectors -->
+  <path d="M 18,50 L 50,20 L 18,20 Z" fill="#c09853"/>
+  <path d="M 198,20 L 230,50 L 230,20 Z" fill="#c09853"/>
+  <path d="M 18,270 L 50,300 L 18,300 Z" fill="#c09853"/>
+  <path d="M 198,300 L 230,270 L 230,300 Z" fill="#c09853"/>
+  <!-- Magic Clover (3 Leaves) -->
+  <g transform="translate(124, 150)" filter="url(#glow3)">
+    <!-- Top Leaf -->
+    <path d="M 0,0 C -25,-35 -5,-55 0,-30 C 5,-55 25,-35 0,0 Z" fill="#4ade80"/>
+    <!-- Left Leaf -->
+    <path d="M 0,0 C -35,-25 -55,-5 -30,0 C -55,5 -35,25 0,0 Z" fill="#22c55e"/>
+    <!-- Right Leaf -->
+    <path d="M 0,0 C 35,-25 55,-5 30,0 C 55,5 35,25 0,0 Z" fill="#22c55e"/>
+    <!-- Stem -->
+    <path d="M 0,0 Q -6,35 12,45" stroke="#16a34a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="5" fill="#86efac"/>
+  </g>
+</svg>

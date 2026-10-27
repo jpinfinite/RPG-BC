@@ -1,0 +1,169 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/yami_bounty_panel.gd" id="1_yami_panel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/yami_sukehiro.svg" id="2_yami_art"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_bg"]
+bg_color = Color(0.08, 0.06, 0.11, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.65, 0.25, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prog_bg"]
+bg_color = Color(0.04, 0.03, 0.06, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.2, 0.4, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prog_fill"]
+bg_color = Color(0.7, 0.25, 0.95, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="YamiBountyPanel" type="Panel"]
+custom_minimum_size = Vector2(460, 210)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bg")
+script = ExtResource("1_yami_panel")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxPrincipal" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxTopo" type="HBoxContainer" parent="Margin/VBoxPrincipal"]
+layout_mode = 2
+
+[node name="LblTitulo" type="Label" parent="Margin/VBoxPrincipal/HBoxTopo"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.75, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Missões do Capitão Yami"
+
+[node name="LblMedalhas" type="Label" parent="Margin/VBoxPrincipal/HBoxTopo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 15
+text = "🏅 Medalhas de Mérito: 0"
+horizontal_alignment = 2
+
+[node name="HBoxConteudo" type="HBoxContainer" parent="Margin/VBoxPrincipal"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="FotoContainer" type="Control" parent="Margin/VBoxPrincipal/HBoxConteudo"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+
+[node name="FotoYami" type="TextureRect" parent="Margin/VBoxPrincipal/HBoxConteudo/FotoContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yami_art")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxMissao" type="VBoxContainer" parent="Margin/VBoxPrincipal/HBoxConteudo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="LblDescricao" type="Label" parent="Margin/VBoxPrincipal/HBoxConteudo/VBoxMissao"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/line_spacing = 2
+theme_override_font_sizes/font_size = 13
+text = "\"Supere seus limites! Derrote monstros nas Zonas de Magia.\""
+autowrap_mode = 2
+
+[node name="ContainerBarra" type="Control" parent="Margin/VBoxPrincipal/HBoxConteudo/VBoxMissao"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="ProgressMissao" type="ProgressBar" parent="Margin/VBoxPrincipal/HBoxConteudo/VBoxMissao/ContainerBarra"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_prog_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_prog_fill")
+max_value = 50.0
+value = 24.0
+show_percentage = false
+
+[node name="LblProgressoTexto" type="Label" parent="Margin/VBoxPrincipal/HBoxConteudo/VBoxMissao/ContainerBarra"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "24 / 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblRecompensa" type="Label" parent="Margin/VBoxPrincipal/HBoxConteudo/VBoxMissao"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.95, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "Recompensa: +5 Medalhas 🏅"
+horizontal_alignment = 2
+
+[node name="BtnTrocarMissao" type="Button" parent="Margin/VBoxPrincipal/HBoxConteudo/VBoxMissao"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Trocar missão"
+tooltip_text = "Abandona a missão atual e recebe outra missão disponível."

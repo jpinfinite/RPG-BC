@@ -1,0 +1,254 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat_ui.gd" id="1_combat_ui"]
+[ext_resource type="Texture2D" path="res://assets/sprites/battle_background.svg" id="2_bg_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/hero_anti_magic.png" id="3_hero_texture"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemy_javali_mana.svg" id="4_enemy_texture"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg_hp"]
+bg_color = Color(0.1, 0.04, 0.05, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.2, 0.2, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_hp"]
+bg_color = Color(0.9, 0.15, 0.25, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.4, 0.5, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="CombatUI" type="Control"]
+custom_minimum_size = Vector2(480, 360)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 360.0
+grow_horizontal = 2
+script = ExtResource("1_combat_ui")
+
+[node name="BackgroundArena" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg_texture")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BordaMoldura" type="ReferenceRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(0.7, 0.55, 0.2, 0.6)
+border_width = 2.0
+editor_only = false
+
+[node name="TopHUD" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = -24.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="LblTipoAndar" type="Label" parent="TopHUD"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "Andar 1 • [Comum]"
+horizontal_alignment = 1
+
+[node name="LblNomeMonstro" type="Label" parent="TopHUD"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "Javali de Mana Selvagem"
+horizontal_alignment = 1
+
+[node name="ContainerVida" type="Control" parent="TopHUD"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="ProgressVida" type="ProgressBar" parent="TopHUD/ContainerVida"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_right = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bg_hp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_hp")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="LblVidaTexto" type="Label" parent="TopHUD/ContainerVida"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "57 / 57 HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArenaCombatentes" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeroContainer" type="Control" parent="ArenaCombatentes"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -100.0
+offset_right = 230.0
+offset_bottom = 110.0
+grow_vertical = 2
+
+[node name="HeroShadow" type="ColorRect" parent="ArenaCombatentes/HeroContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -18.0
+offset_right = 50.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.45)
+
+[node name="HeroSprite" type="TextureRect" parent="ArenaCombatentes/HeroContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hero_texture")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LblNomeHero" type="Label" parent="ArenaCombatentes/HeroContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -2.0
+offset_right = 70.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "Asta (Anti-Magia)"
+horizontal_alignment = 1
+
+[node name="EnemyContainer" type="Control" parent="ArenaCombatentes"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -100.0
+offset_right = -50.0
+offset_bottom = 110.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="EnemyShadow" type="ColorRect" parent="ArenaCombatentes/EnemyContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -18.0
+offset_right = 55.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.45)
+
+[node name="EnemySprite" type="TextureRect" parent="ArenaCombatentes/EnemyContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_enemy_texture")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpawnDano" type="Control" parent="ArenaCombatentes/EnemyContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2

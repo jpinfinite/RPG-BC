@@ -1,0 +1,99 @@
+[gd_scene load_steps=19 format=3 uid="uid://c6v2n7xwy8x0l"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Texture2D" path="res://assets/sprites/app_background.svg" id="2_app_bg"]
+[ext_resource type="Script" path="res://scripts/SaveManager.gd" id="2_save"]
+[ext_resource type="Script" path="res://scripts/CombatManager.gd" id="3_combat"]
+[ext_resource type="Script" path="res://scripts/MagoProgressao.gd" id="4_mago"]
+[ext_resource type="Script" path="res://scripts/CozinhaCharmy.gd" id="5_charmy"]
+[ext_resource type="Script" path="res://scripts/ContratoDemonio.gd" id="6_contrato"]
+[ext_resource type="Script" path="res://scripts/RankManager.gd" id="7_rank"]
+[ext_resource type="Script" path="res://scripts/EsquadraoManager.gd" id="8_esquadrao"]
+[ext_resource type="Script" path="res://scripts/SpellCooldownManager.gd" id="9_spell"]
+[ext_resource type="Script" path="res://scripts/MissaoManager.gd" id="16_missao"]
+[ext_resource type="Script" path="res://scripts/LojaTempoJulius.gd" id="17_loja_julius"]
+[ext_resource type="PackedScene" path="res://scenes/combat_ui.tscn" id="10_combat_ui"]
+[ext_resource type="PackedScene" path="res://scenes/skills_hud.tscn" id="11_skills_hud"]
+[ext_resource type="PackedScene" path="res://scenes/upgrade_menu.tscn" id="12_upg_ui"]
+[ext_resource type="PackedScene" path="res://scenes/invocacao_grimorio_ui.tscn" id="13_invoc_ui"]
+[ext_resource type="PackedScene" path="res://scenes/rank_hud.tscn" id="14_rank_hud"]
+[ext_resource type="PackedScene" path="res://scenes/recompensa_offline_popup.tscn" id="15_popup"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="BackgroundGeral" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_app_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SaveManager" type="Node" parent="." groups=["save_manager"]]
+script = ExtResource("2_save")
+
+[node name="CombatManager" type="Node" parent="." groups=["combat_manager"]]
+script = ExtResource("3_combat")
+
+[node name="MagoProgressao" type="Node" parent="." groups=["mago_progressao"]]
+script = ExtResource("4_mago")
+
+[node name="CozinhaCharmy" type="Node" parent="." groups=["cozinha_charmy"]]
+script = ExtResource("5_charmy")
+
+[node name="ContratoDemonio" type="Node" parent="." groups=["contrato_demonio"]]
+script = ExtResource("6_contrato")
+
+[node name="RankManager" type="Node" parent="." groups=["rank_manager"]]
+script = ExtResource("7_rank")
+
+[node name="EsquadraoManager" type="Node" parent="." groups=["esquadrao_manager"]]
+script = ExtResource("8_esquadrao")
+
+[node name="SpellCooldownManager" type="Node" parent="." groups=["spell_cooldown_manager"]]
+script = ExtResource("9_spell")
+
+[node name="MissaoManager" type="Node" parent="." groups=["missao_manager"]]
+script = ExtResource("16_missao")
+
+[node name="LojaTempoJulius" type="Node" parent="." groups=["loja_tempo_julius"]]
+script = ExtResource("17_loja_julius")
+
+[node name="LayoutVertical" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="CombatUI" parent="LayoutVertical" instance=ExtResource("10_combat_ui")]
+layout_mode = 2
+
+[node name="SkillsHUD" parent="LayoutVertical" instance=ExtResource("11_skills_hud")]
+layout_mode = 2
+
+[node name="UpgradeMenu" parent="LayoutVertical" instance=ExtResource("12_upg_ui")]
+layout_mode = 2
+
+[node name="InvocacaoGrimorioUI" parent="LayoutVertical" instance=ExtResource("13_invoc_ui")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RankHUD" parent="." instance=ExtResource("14_rank_hud")]
+layout_mode = 1
+
+[node name="RecompensaOfflinePopup" parent="." instance=ExtResource("15_popup")]
+visible = false
+layout_mode = 1

@@ -40,9 +40,6 @@ func verificar_promocao() -> void:
 			jogador_promovido.emit(RANKS[rank_index_atual]["titulo"])
 
 func _aplicar_beneficios_rank() -> void:
-	var rank_data = RANKS[rank_index_atual]
-	print("PROMOÇÃO! Você agora é um: ", rank_data["titulo"])
-	
 	# Injeta os multiplicadores de rank diretamente na fórmula global do GameManager
 	if game_manager:
 		game_manager.actualizar_multiplicadores_globais()

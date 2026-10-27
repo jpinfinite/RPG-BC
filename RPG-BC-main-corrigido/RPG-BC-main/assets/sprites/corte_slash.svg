@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- Radial gradient: center is bright red/white (high R), edges fall off to black/transparent -->
+    <radialGradient id="slashGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#ff3333"/>
+      <stop offset="70%" stop-color="#880000"/>
+      <stop offset="100%" stop-color="#110000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bladeArc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Slash Arc Outer Trail -->
+  <path d="M 28,218 C 65,170 120,60 228,32 C 165,95 85,185 28,218 Z" fill="url(#slashGlow)"/>
+
+  <!-- Main Sharp Katana Crescent Blade -->
+  <path d="M 32,214 C 70,165 130,55 224,36 C 170,90 90,180 32,214 Z" fill="url(#bladeArc)"/>
+
+  <!-- Core Pure White Energy Razor Line -->
+  <path d="M 40,205 C 78,158 135,62 218,42 C 168,88 95,172 40,205 Z" fill="#ffffff"/>
+
+  <!-- Energy sparks & secondary cracks along slash -->
+  <polygon points="120,110 125,112 118,118 116,113" fill="#ffffff"/>
+  <polygon points="160,80 166,82 158,89 155,83" fill="#ffffff"/>
+  <polygon points="85,155 90,157 82,163 80,158" fill="#ffffff"/>
+  <polygon points="190,56 194,57 188,62 186,59" fill="#ffffff"/>
+</svg>

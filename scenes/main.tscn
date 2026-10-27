@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c6v2n7xwy8x0l"]
+[gd_scene load_steps=22 format=3 uid="uid://c6v2n7xwy8x0l"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="Texture2D" path="res://assets/sprites/app_background.svg" id="2_app_bg"]
@@ -12,12 +12,33 @@
 [ext_resource type="Script" path="res://scripts/SpellCooldownManager.gd" id="9_spell"]
 [ext_resource type="Script" path="res://scripts/MissaoManager.gd" id="16_missao"]
 [ext_resource type="Script" path="res://scripts/LojaTempoJulius.gd" id="17_loja_julius"]
+[ext_resource type="Script" path="res://scripts/resources_hud.gd" id="18_resources_hud"]
 [ext_resource type="PackedScene" path="res://scenes/combat_ui.tscn" id="10_combat_ui"]
 [ext_resource type="PackedScene" path="res://scenes/skills_hud.tscn" id="11_skills_hud"]
 [ext_resource type="PackedScene" path="res://scenes/upgrade_menu.tscn" id="12_upg_ui"]
 [ext_resource type="PackedScene" path="res://scenes/invocacao_grimorio_ui.tscn" id="13_invoc_ui"]
 [ext_resource type="PackedScene" path="res://scenes/rank_hud.tscn" id="14_rank_hud"]
 [ext_resource type="PackedScene" path="res://scenes/recompensa_offline_popup.tscn" id="15_popup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
+bg_color = Color(0.09, 0.07, 0.13, 0.97)
+border_width_bottom = 1
+border_color = Color(0.29, 0.19, 0.37, 0.8)
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_resource_card"]
+bg_color = Color(0.14, 0.1, 0.19, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.19, 0.37, 0.7)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -76,20 +97,122 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 0
+
+[node name="HeaderPanel" type="PanelContainer" parent="LayoutVertical"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_header")
+
+[node name="ResourcesHUD" type="Control" parent="LayoutVertical/HeaderPanel"]
+layout_mode = 2
+script = ExtResource("18_resources_hud")
+
+[node name="HeaderMargin" type="MarginContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxHeader" type="VBoxContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HeaderHBox" type="HBoxContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ResourceCard_Ouro" type="PanelContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_resource_card")
+
+[node name="LblOuro" type="Label" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/HeaderHBox/ResourceCard_Ouro"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.84, 0.24, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "🪙 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResourceCard_Poeira" type="PanelContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_resource_card")
+
+[node name="LblPoeira" type="Label" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/HeaderHBox/ResourceCard_Poeira"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "✨ 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResourceCard_DPS" type="PanelContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_resource_card")
+
+[node name="LblDps" type="Label" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/HeaderHBox/ResourceCard_DPS"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 1.0, 0.55, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "⚔ 10 DPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AndarRankRow" type="HBoxContainer" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblAndar" type="Label" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/AndarRankRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.93, 0.91, 0.86, 1)
+theme_override_font_sizes/font_size = 11
+text = "Andar 1"
+horizontal_alignment = 0
+
+[node name="LblRank" type="Label" parent="LayoutVertical/HeaderPanel/ResourcesHUD/HeaderMargin/VBoxHeader/AndarRankRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.84, 0.68, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Cavaleiro Mágico Júnior"
+horizontal_alignment = 2
 
 [node name="CombatUI" parent="LayoutVertical" instance=ExtResource("10_combat_ui")]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="SkillsHUD" parent="LayoutVertical" instance=ExtResource("11_skills_hud")]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="UpgradeMenu" parent="LayoutVertical" instance=ExtResource("12_upg_ui")]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="InvocacaoGrimorioUI" parent="LayoutVertical" instance=ExtResource("13_invoc_ui")]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 0
 
 [node name="RankHUD" parent="." instance=ExtResource("14_rank_hud")]
 layout_mode = 1

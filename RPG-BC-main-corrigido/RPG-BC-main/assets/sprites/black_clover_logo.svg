@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 256" width="512" height="256">
+  <defs>
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0aa"/>
+      <stop offset="35%" stop-color="#e0b840"/>
+      <stop offset="70%" stop-color="#a87a15"/>
+      <stop offset="100%" stop-color="#553905"/>
+    </linearGradient>
+    <linearGradient id="crimsonBlade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff1a1a"/>
+      <stop offset="50%" stop-color="#880011"/>
+      <stop offset="100%" stop-color="#1a0005"/>
+    </linearGradient>
+    <filter id="demonAura" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Dark Anti-Magic Shadow Vortex behind logo -->
+  <path d="M 120,128 Q 150,40 256,35 Q 380,30 420,110 Q 450,180 340,215 Q 220,245 140,200 Z" fill="#150518" opacity="0.8" filter="url(#demonAura)"/>
+  
+  <!-- Stylized 5-Leaf Clover Emblem -->
+  <g transform="translate(80, 115) scale(0.85)" filter="url(#demonAura)">
+    <!-- Top Leaf -->
+    <path d="M 0,0 C -22,-32 -5,-50 0,-25 C 5,-50 22,-32 0,0 Z" fill="#202022" stroke="#ff2244" stroke-width="2"/>
+    <!-- Left Leaf -->
+    <path d="M 0,0 C -32,-22 -50,-5 -25,0 C -50,5 -32,22 0,0 Z" fill="#1a1a1c" stroke="#ff2244" stroke-width="2"/>
+    <!-- Right Leaf -->
+    <path d="M 0,0 C 32,-22 50,-5 25,0 C 50,5 32,22 0,0 Z" fill="#1a1a1c" stroke="#ff2244" stroke-width="2"/>
+    <!-- Bottom Left Leaf (4th) -->
+    <path d="M 0,0 C -26,10 -40,30 -18,28 C -22,42 -5,35 0,0 Z" fill="#111113" stroke="#cc1133" stroke-width="2"/>
+    <!-- 5th Leaf: Demon Sprout in center-bottom -->
+    <path d="M 0,0 C 5,35 22,42 18,28 C 40,30 26,10 0,0 Z" fill="#080809" stroke="#ff002b" stroke-width="2.5"/>
+    <!-- Center Demon Core -->
+    <circle cx="0" cy="0" r="6" fill="#ff1a33"/>
+  </g>
+
+  <!-- Anti-Magic Crimson Arc Slice cutting through the title -->
+  <path d="M 50,175 C 160,140 330,85 480,50 C 370,110 200,185 50,175 Z" fill="url(#crimsonBlade)" opacity="0.65"/>
+
+  <!-- "BLACK CLOVER" Main Typography -->
+  <text x="310" y="115" font-family="'Impact', 'Arial Black', sans-serif" font-size="52" font-weight="900" letter-spacing="4" fill="url(#goldText)" stroke="#0c0702" stroke-width="3" text-anchor="middle">
+    BLACK CLOVER
+  </text>
+
+  <!-- Subtitle Ribbon / "IDLE MAGIC RPG" -->
+  <rect x="180" y="138" width="260" height="26" rx="5" fill="#0d1b2a" stroke="url(#goldText)" stroke-width="1.5"/>
+  <text x="310" y="156" font-family="sans-serif" font-size="14" font-weight="bold" letter-spacing="6" fill="#ffd166" text-anchor="middle">
+    IDLE MAGIC RPG
+  </text>
+
+  <!-- Royal Clover Gold Accents & Sparks -->
+  <polygon points="175,98 178,103 183,103 179,106 181,111 175,108 170,111 172,106 168,103 173,103" fill="#ffe299"/>
+  <polygon points="445,98 448,103 453,103 449,106 451,111 445,108 440,111 442,106 438,103 443,103" fill="#ffe299"/>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="vettoAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff0055" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#ffaa00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4d0022" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vettoSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4a373"/>
+      <stop offset="60%" stop-color="#b07d50"/>
+      <stop offset="100%" stop-color="#7a4e28"/>
+    </linearGradient>
+    <filter id="despairGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="128" cy="228" rx="80" ry="18" fill="#000000" opacity="0.6"/>
+
+  <!-- Colossal Mythic Beast Aura -->
+  <circle cx="128" cy="120" r="95" fill="url(#vettoAura)" filter="url(#despairGlow)"/>
+
+  <!-- Wild Spiky Golden/Blonde Hair -->
+  <path d="M 60,110 L 40,85 L 58,75 L 42,50 L 68,48 L 75,20 L 98,38 L 120,15 L 138,38 L 160,20 L 168,48 L 195,50 L 180,75 L 198,85 L 178,110 Z" fill="#f4a261" stroke="#e76f51" stroke-width="2"/>
+
+  <!-- Massive Muscular Torso -->
+  <path d="M 68,140 L 52,215 L 204,215 L 188,140 L 160,120 L 96,120 Z" fill="url(#vettoSkin)" stroke="#3d220f" stroke-width="2.5"/>
+  
+  <!-- Pecs and Abs definition -->
+  <path d="M 128,135 L 128,210" stroke="#5c3518" stroke-width="2.5"/>
+  <path d="M 95,155 Q 128,165 160,155" stroke="#5c3518" stroke-width="2.5" fill="none"/>
+  <path d="M 100,180 Q 128,188 155,180" stroke="#5c3518" stroke-width="2" fill="none"/>
+
+  <!-- Red Demonic Mythic Beast Tattoos -->
+  <g stroke="#ff0033" stroke-width="3" fill="none" filter="url(#despairGlow)">
+    <path d="M 75,145 Q 95,160 85,185"/>
+    <path d="M 180,145 Q 160,160 170,185"/>
+    <path d="M 110,135 Q 128,148 146,135"/>
+    <circle cx="128" cy="170" r="8"/>
+  </g>
+
+  <!-- Bestial Arms with Claws -->
+  <path d="M 68,140 L 40,175 L 55,205 L 80,178 Z" fill="#b07d50" stroke="#3d220f" stroke-width="2"/>
+  <path d="M 188,140 L 216,175 L 202,205 L 176,178 Z" fill="#b07d50" stroke="#3d220f" stroke-width="2"/>
+
+  <!-- Head / Face -->
+  <path d="M 88,75 L 85,115 Q 128,138 170,115 L 168,75 Z" fill="#c48a58" stroke="#3d220f" stroke-width="2.5"/>
+
+  <!-- Furious Eyes (Right and Left) -->
+  <polygon points="98,85 115,82 108,92" fill="#ffffff" stroke="#220e04" stroke-width="1.5"/>
+  <polygon points="142,82 158,85 148,92" fill="#ffffff" stroke="#220e04" stroke-width="1.5"/>
+  <circle cx="107" cy="87" r="3" fill="#ff0033"/>
+  <circle cx="149" cy="87" r="3" fill="#ff0033"/>
+
+  <!-- Roaring Open Jaws with Sharp Fangs -->
+  <path d="M 104,102 Q 128,110 152,102 Q 128,128 104,102 Z" fill="#3a050f" stroke="#1f0208" stroke-width="2"/>
+  <!-- Top Fangs -->
+  <polygon points="112,102 116,110 120,102" fill="#ffffff"/>
+  <polygon points="136,102 140,110 144,102" fill="#ffffff"/>
+  <!-- Bottom Fangs -->
+  <polygon points="124,118 128,110 132,118" fill="#ffffff"/>
+
+  <!-- THIRD EYE OF DESPAIR ON FOREHEAD (Glows Pure Crimson) -->
+  <g filter="url(#despairGlow)">
+    <path d="M 115,64 Q 128,50 141,64 Q 128,78 115,64 Z" fill="#110000" stroke="#ff0044" stroke-width="2"/>
+    <circle cx="128" cy="64" r="5" fill="#ff0033"/>
+    <circle cx="128" cy="64" r="2.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Boss Crown / Horn Indicator -->
+  <polygon points="128,15 133,30 123,30" fill="#ffd166"/>
+</svg>

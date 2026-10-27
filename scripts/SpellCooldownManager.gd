@@ -57,32 +57,22 @@ func _conjurar_magia_automatica(id_magia: String) -> void:
 	cooldowns_atuais[id_magia] = dados_magia["cooldown"]
 	
 	# Calcula o golpe usando o dano atualizado do jogador com todos os modificadores
-	var dps_base = game_manager.dano_por_segundo + game_manager.get("dps_esquadrao_passivo")
-	var mult_anti = game_manager.get("mult_anti_magia_definitivo")
-	if mult_anti == null: mult_anti = 1.0
-	var mult_rank = game_manager.get("mult_dano_rank")
-	if mult_rank == null: mult_rank = 1.0
-	
-	var dano_base = dps_base * game_manager.multiplicador_mana * mult_anti * mult_rank
-	var dano_burst = dano_base * dados_magia["mult_dano"]
-	
-	# Aplica o golpe no inimigo que estiver na tela através do CombatManager
+	# Calcula o dano do feitiço com todos os modificadores ativos
+	var dps_esquadrao: float = game_manager.get("dps_esquadrao_passivo") if game_manager.get("dps_esquadrao_passivo") != null else 0.0
+	var dps_base: float = game_manager.dano_por_segundo + dps_esquadrao
+	var mult_anti: float = game_manager.get("mult_anti_magia_definitivo") if game_manager.get("mult_anti_magia_definitivo") != null else 1.0
+	var mult_rank: float = game_manager.get("mult_dano_rank") if game_manager.get("mult_dano_rank") != null else 1.0
+
+	var dano_base: float = dps_base * game_manager.multiplicador_mana * mult_anti * mult_rank
+	var dano_burst: float = dano_base * dados_magia["mult_dano"]
+
+	# Delega o dano ao CombatManager (fonte única de verdade) — evita double-kill
 	if not combat_manager:
 		_resolver_referencias()
-		
+
 	if combat_manager and not combat_manager.inimigo_atual.is_empty():
-		combat_manager.inimigo_atual["vida_atual"] -= dano_burst
-		var vida_clamped = clampf(combat_manager.inimigo_atual["vida_atual"], 0.0, combat_manager.inimigo_atual["vida_max"])
-		combat_manager.dano_causado.emit(dano_burst, true, vida_clamped)
-		print("¡AUTO-CAST! ", dados_magia["nome"], " causou ", int(dano_burst), " de dano mágico em área!")
-		
-		# Dispara o efeito visual do corte com o elemento da magia usando o AntiMagiaShader e ColorManager
-		combat_manager.disparar_efeito_corte(Vector2(540, 180), dados_magia.get("elemento", "Anti-Magia"))
-		
-		# Verifica se o monstro faleceu devido ao feitiço
-		if combat_manager.inimigo_atual["vida_atual"] <= 0:
-			combat_manager._on_inimigo_derrotado()
-			
+		combat_manager.aplicar_dano_magia(dano_burst, dados_magia.get("elemento", "Anti-Magia"))
+
 	magia_conjurada.emit(id_magia)
 
 # Função para comprar novas magias usando Poeira de Mana

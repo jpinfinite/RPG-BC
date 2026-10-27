@@ -1,0 +1,306 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/loja_julius_hud.gd" id="1_loja_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/julius_time_clock.svg" id="2_clock_bg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/julius_novachrono.svg" id="3_julius_art"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_bg"]
+bg_color = Color(0.03, 0.07, 0.14, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.6, 0.9, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_row_bg"]
+bg_color = Color(0.06, 0.12, 0.22, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.5, 0.8, 0.5)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_julius"]
+bg_color = Color(0.12, 0.35, 0.65, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.85, 0.3, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.18, 0.45, 0.8, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.95, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_disabled"]
+bg_color = Color(0.08, 0.12, 0.18, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.3, 0.4, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="LojaJuliusHUD" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_loja_script")
+
+[node name="PanelPrincipal" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bg")
+
+[node name="FundoRelogio" type="TextureRect" parent="PanelPrincipal"]
+modulate = Color(1, 1, 1, 0.18)
+layout_mode = 2
+texture = ExtResource("2_clock_bg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Margin" type="MarginContainer" parent="PanelPrincipal"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxConteudo" type="VBoxContainer" parent="PanelPrincipal/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxTopo" type="HBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FotoJulius" type="TextureRect" parent="PanelPrincipal/Margin/VBoxConteudo/HBoxTopo"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+texture = ExtResource("3_julius_art")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxTitulos" type="VBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/HBoxTopo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="LblTitulo" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/HBoxTopo/VBoxTitulos"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Distorção Temporal de Julius"
+
+[node name="LblSubtitulo" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/HBoxTopo/VBoxTitulos"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 0.85)
+theme_override_font_sizes/font_size = 11
+text = "Avance horas de progresso instantaneamente"
+
+[node name="LblMedalhasDisponiveis" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/HBoxTopo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "🏅 Medalhas de Mérito: 0"
+horizontal_alignment = 2
+
+[node name="LblFeedbackTempo" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.85, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "O Rei Mago aguarda seu pedido para manipular o tempo..."
+horizontal_alignment = 1
+
+[node name="ContainerItens" type="VBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Row_skip_1h" type="PanelContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_row_bg")
+
+[node name="Margin" type="MarginContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icone" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h/Margin/HBox"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "⏳"
+horizontal_alignment = 1
+
+[node name="VBoxInfo" type="VBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Nome" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h/Margin/HBox/VBoxInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Ampulheta de Mana (1 Hora)"
+
+[node name="Custo" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h/Margin/HBox/VBoxInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "Custo: 10 Medalhas 🏅"
+
+[node name="BtnComprar" type="Button" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_1h/Margin/HBox"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_julius")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+text = "Pedir Ajuda ao Rei Mago"
+
+[node name="Row_skip_4h" type="PanelContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_row_bg")
+
+[node name="Margin" type="MarginContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icone" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h/Margin/HBox"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "🔮"
+horizontal_alignment = 1
+
+[node name="VBoxInfo" type="VBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Nome" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h/Margin/HBox/VBoxInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Orbe Temporal (4 Horas)"
+
+[node name="Custo" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h/Margin/HBox/VBoxInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "Custo: 35 Medalhas 🏅"
+
+[node name="BtnComprar" type="Button" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_4h/Margin/HBox"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_julius")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+text = "Pedir Ajuda ao Rei Mago"
+
+[node name="Row_skip_12h" type="PanelContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_row_bg")
+
+[node name="Margin" type="MarginContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="HBox" type="HBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icone" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h/Margin/HBox"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "📜"
+horizontal_alignment = 1
+
+[node name="VBoxInfo" type="VBoxContainer" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Nome" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h/Margin/HBox/VBoxInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Grimório do Tempo (12 Horas)"
+
+[node name="Custo" type="Label" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h/Margin/HBox/VBoxInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "Custo: 90 Medalhas 🏅"
+
+[node name="BtnComprar" type="Button" parent="PanelPrincipal/Margin/VBoxConteudo/ContainerItens/Row_skip_12h/Margin/HBox"]
+custom_minimum_size = Vector2(170, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_julius")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+text = "Pedir Ajuda ao Rei Mago"

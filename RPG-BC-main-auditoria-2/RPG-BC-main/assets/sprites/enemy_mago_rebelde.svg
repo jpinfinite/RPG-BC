@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="diamondRobe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b263b"/>
+      <stop offset="60%" stop-color="#0d1b2a"/>
+      <stop offset="100%" stop-color="#050a12"/>
+    </linearGradient>
+    <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#caf0f8"/>
+      <stop offset="40%" stop-color="#48cae4"/>
+      <stop offset="100%" stop-color="#0077b6"/>
+    </linearGradient>
+    <filter id="diamondGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="128" cy="225" rx="60" ry="14" fill="#000000" opacity="0.45"/>
+
+  <!-- Floating Diamond Crystals around him -->
+  <g filter="url(#diamondGlow)">
+    <polygon points="55,100 68,85 75,105 62,115" fill="url(#crystalGrad)"/>
+    <polygon points="45,145 55,130 62,148 50,158" fill="url(#crystalGrad)"/>
+    <polygon points="205,110 218,92 225,115 212,126" fill="url(#crystalGrad)"/>
+    <polygon points="195,165 208,150 215,170 200,180" fill="url(#crystalGrad)"/>
+  </g>
+
+  <!-- Floating Diamond Grimoire (Right side) -->
+  <g transform="translate(180, 120) rotate(-15)">
+    <!-- Book Body -->
+    <rect x="-18" y="-24" width="36" height="48" rx="4" fill="#1d3557" stroke="#48cae4" stroke-width="2"/>
+    <!-- Diamond Emblem on Cover -->
+    <polygon points="0,-12 10,0 0,12 -10,0" fill="#a8dadc" stroke="#ffffff" stroke-width="1.5" filter="url(#diamondGlow)"/>
+  </g>
+
+  <!-- Mage Robe Body -->
+  <path d="M 85,115 L 68,215 L 180,215 L 165,115 Z" fill="url(#diamondRobe)" stroke="#050a12" stroke-width="2"/>
+  
+  <!-- Belt & Magic Pouches -->
+  <rect x="80" y="145" width="90" height="10" rx="2" fill="#415a77" stroke="#0d1b2a" stroke-width="1.5"/>
+  <rect x="115" y="143" width="18" height="14" rx="2" fill="#e0e1dd" stroke="#1b263b" stroke-width="1.5"/>
+
+  <!-- Arms & Sleeves -->
+  <!-- Left Hand raising ice spell -->
+  <path d="M 85,120 L 52,145 L 65,155 L 95,132 Z" fill="#1b263b" stroke="#0a121c" stroke-width="2"/>
+  <!-- Glowing Ice Mana in Hand -->
+  <polygon points="45,145 35,135 48,125 58,138" fill="#caf0f8" filter="url(#diamondGlow)"/>
+  
+  <!-- Right Arm -->
+  <path d="M 160,120 L 178,145 L 165,155 L 148,132 Z" fill="#1b263b" stroke="#0a121c" stroke-width="2"/>
+
+  <!-- Hooded Head -->
+  <path d="M 88,118 C 75,70 110,48 128,48 C 146,48 180,70 168,118 Z" fill="#0d1b2a" stroke="#050a12" stroke-width="2.5"/>
+
+  <!-- Iron Battle Mask under Hood -->
+  <path d="M 98,82 L 110,112 L 145,112 L 156,82 Z" fill="#415a77" stroke="#1b263b" stroke-width="2"/>
+  <line x1="128" y1="82" x2="128" y2="112" stroke="#1b263b" stroke-width="2"/>
+
+  <!-- Cyan Glowing Eyes behind Mask -->
+  <line x1="108" y1="88" x2="120" y2="90" stroke="#00f5d4" stroke-width="3" stroke-linecap="round" filter="url(#diamondGlow)"/>
+  <line x1="135" y1="90" x2="147" y2="88" stroke="#00f5d4" stroke-width="3" stroke-linecap="round" filter="url(#diamondGlow)"/>
+</svg>
