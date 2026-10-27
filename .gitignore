@@ -5,6 +5,7 @@
 # Build & export outputs
 build/
 export/
+*.zip
 
 # OS and Editor temporary files
 Thumbs.db
